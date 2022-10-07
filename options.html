@@ -3752,6 +3752,41 @@ Note that lists are converted to duplicate keys.
 }
 </pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/gpg.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/gpg.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.havoc.enable"></a><a class="term" href="options.html#opt-programs.havoc.enable"><code class="option">programs.havoc.enable</code></a></span></dt><dd><p>Whether to enable Havoc terminal.</p><p><span class="emphasis"><em>Type:</em></span> boolean</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">false</code></p><p><span class="emphasis"><em>Example:</em></span> <code class="literal">true</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/havoc.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/havoc.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.havoc.package"></a><a class="term" href="options.html#opt-programs.havoc.package"><code class="option">programs.havoc.package</code></a></span></dt><dd><p></p><p><span class="emphasis"><em>Type:</em></span> package</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">pkgs.havoc</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/havoc.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/havoc.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.havoc.settings"></a><a class="term" href="options.html#opt-programs.havoc.settings"><code class="option">programs.havoc.settings</code></a></span></dt><dd><p>Configuration written to
+<code class="filename">$XDG_CONFIG_HOME/havoc.cfg</code>. See <a class="link" href="https://raw.githubusercontent.com/ii8/havoc/master/havoc.cfg" target="_top">https://raw.githubusercontent.com/ii8/havoc/master/havoc.cfg</a>
+for a list of available options.
+</p><p><span class="emphasis"><em>Type:</em></span> attribute set of attribute set of (INI atom (null, bool, int, float or string))</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">
+        {
+        
+        }
+    </code></p><p><span class="emphasis"><em>Example:</em></span> </p><pre class="programlisting">{
+  child.program = "bash";
+  window.opacity = 240;
+  window.margin = no;
+  terminal = {
+    rows = 80;
+    columns = 24;
+    scrollback = 2000;
+  };
+  bind = {
+    "C-S-c" = "copy";
+    "C-S-v" = "paste";
+    "C-S-r" = "reset";
+    "C-S-Delete" = "hard reset";
+    "C-S-j" = "scroll down";
+    "C-S-k" = "scroll up";
+    "C-S-Page_Down" = "scroll down page";
+    "C-S-Page_Up" = "scroll up page";
+    "C-S-End" = "scroll to bottom";
+    "C-S-Home" = "scroll to top";
+  };
+}
+</pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/havoc.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/havoc.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.helix.enable"></a><a class="term" href="options.html#opt-programs.helix.enable"><code class="option">programs.helix.enable</code></a></span></dt><dd><p>Whether to enable helix text editor.</p><p><span class="emphasis"><em>Type:</em></span> boolean</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">false</code></p><p><span class="emphasis"><em>Example:</em></span> <code class="literal">true</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/helix.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/helix.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.helix.package"></a><a class="term" href="options.html#opt-programs.helix.package"><code class="option">programs.helix.package</code></a></span></dt><dd><p>The package to use for helix.</p><p><span class="emphasis"><em>Type:</em></span> package</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">pkgs.helix</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/helix.nix#blob-path" target="_top">
@@ -4854,6 +4889,18 @@ for supported values.
 }
 </pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/lazygit.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/lazygit.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.ledger.enable"></a><a class="term" href="options.html#opt-programs.ledger.enable"><code class="option">programs.ledger.enable</code></a></span></dt><dd><p>Whether to enable ledger, a double-entry accounting system.</p><p><span class="emphasis"><em>Type:</em></span> boolean</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">false</code></p><p><span class="emphasis"><em>Example:</em></span> <code class="literal">true</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/ledger.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/ledger.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.ledger.package"></a><a class="term" href="options.html#opt-programs.ledger.package"><code class="option">programs.ledger.package</code></a></span></dt><dd><p></p><p><span class="emphasis"><em>Type:</em></span> package</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">pkgs.ledger</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/ledger.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/ledger.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.ledger.extraConfig"></a><a class="term" href="options.html#opt-programs.ledger.extraConfig"><code class="option">programs.ledger.extraConfig</code></a></span></dt><dd><p>Configuration written to <code class="filename">$XDG_CONFIG_HOME/ledger/ledgerrc</code>.
+See <a class="link" href="https://www.ledger-cli.org/3.0/doc/ledger3.html#Detailed-Option-Description" target="_top">https://www.ledger-cli.org/3.0/doc/ledger3.html#Detailed-Option-Description</a>
+for explanation about possible values.
+</p><p><span class="emphasis"><em>Type:</em></span> strings concatenated with "\n"</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">""</code></p><p><span class="emphasis"><em>Example:</em></span> </p><pre class="programlisting">--sort date
+--effective
+--date-format %Y-%m-%d
+</pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/ledger.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/ledger.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.less.enable"></a><a class="term" href="options.html#opt-programs.less.enable"><code class="option">programs.less.enable</code></a></span></dt><dd><p>Whether to enable less, opposite of more.</p><p><span class="emphasis"><em>Type:</em></span> boolean</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">false</code></p><p><span class="emphasis"><em>Example:</em></span> <code class="literal">true</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/less.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/less.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.less.keys"></a><a class="term" href="options.html#opt-programs.less.keys"><code class="option">programs.less.keys</code></a></span></dt><dd><p>Extra configuration for <span class="command"><strong>less</strong></span> written to
@@ -6655,7 +6702,9 @@ but our default is to follow XDG.
                     &lt;home-manager/modules/programs/sbt.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.package"></a><a class="term" href="options.html#opt-programs.sbt.package"><code class="option">programs.sbt.package</code></a></span></dt><dd><p>The package with sbt to be installed.</p><p><span class="emphasis"><em>Type:</em></span> package</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">pkgs.sbt</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/sbt.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/sbt.nix&gt;
-                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.baseConfigPath"></a><a class="term" href="options.html#opt-programs.sbt.baseConfigPath"><code class="option">programs.sbt.baseConfigPath</code></a></span></dt><dd><p>Where the plugins and credentials should be located.</p><p><span class="emphasis"><em>Type:</em></span> string</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">".sbt/1.0"</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/sbt.nix#blob-path" target="_top">
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.baseUserConfigPath"></a><a class="term" href="options.html#opt-programs.sbt.baseUserConfigPath"><code class="option">programs.sbt.baseUserConfigPath</code></a></span></dt><dd><p>Where the sbt configuration files should be located, relative
+<code class="envar">HOME</code>.
+</p><p><span class="emphasis"><em>Type:</em></span> string</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">".sbt"</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/sbt.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/sbt.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.credentials"></a><a class="term" href="options.html#opt-programs.sbt.credentials"><code class="option">programs.sbt.credentials</code></a></span></dt><dd><p>A list of credentials to define in the sbt configuration directory.
 </p><p><span class="emphasis"><em>Type:</em></span> list of (submodule)</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">
@@ -6704,6 +6753,40 @@ the repository.
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.plugins._.org"></a><a class="term" href="options.html#opt-programs.sbt.plugins._.org"><code class="option">programs.sbt.plugins.*.org</code></a></span></dt><dd><p>The organization the artifact is published under.</p><p><span class="emphasis"><em>Type:</em></span> string</p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/sbt.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/sbt.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.plugins._.version"></a><a class="term" href="options.html#opt-programs.sbt.plugins._.version"><code class="option">programs.sbt.plugins.*.version</code></a></span></dt><dd><p>The version of the plugin.</p><p><span class="emphasis"><em>Type:</em></span> string</p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/sbt.nix#blob-path" target="_top">
+                    &lt;home-manager/modules/programs/sbt.nix&gt;
+                </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.sbt.repositories"></a><a class="term" href="options.html#opt-programs.sbt.repositories"><code class="option">programs.sbt.repositories</code></a></span></dt><dd><p>A list of repositories to use when resolving dependencies. Defined as a
+list of pre-defined repository or custom repository as a set of name to
+URL. The list will be used populate the <code class="code">~/.sbt/repositories</code>
+file in the order specified.
+
+</p><p>
+
+Pre-defined repositories must be one of <code class="code">local</code>,
+<code class="code">maven-local</code>, <code class="code">maven-central</code>.
+
+</p><p>
+
+Custom repositories are defined as
+<code class="code">{ name-of-repo = "https://url.to.repo.com"}</code>.
+
+</p><p>
+
+See
+<a class="link" href="https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html#3.+Repositories+Section" target="_top">https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html#3.+Repositories+Section</a>
+about this configuration section and
+<a class="link" href="https://www.scala-sbt.org/1.x/docs/Proxy-Repositories.html" target="_top">https://www.scala-sbt.org/1.x/docs/Proxy-Repositories.html</a>
+to read about proxy repositories.
+</p><p><span class="emphasis"><em>Type:</em></span> list of (one of "local", "maven-central", "maven-local" or attribute set of string)</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">
+        [
+        
+        ]
+    </code></p><p><span class="emphasis"><em>Example:</em></span> </p><pre class="programlisting">[
+  "local"
+  { my-ivy-proxy-releases = "http://repo.company.com/ivy-releases/, [organization]/[module]/(scala_[scalaVersion]/)(sbt_[sbtVersion]/)[revision]/[type]s/[artifact](-[classifier]).[ext]" }
+  { my-maven-proxy-releases = "http://repo.company.com/maven-releases/" }
+  "maven-central"
+]
+</pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/sbt.nix#blob-path" target="_top">
                     &lt;home-manager/modules/programs/sbt.nix&gt;
                 </a></code></td></tr></table></dd><dt><span class="term"><a id="opt-programs.scmpuff.enable"></a><a class="term" href="options.html#opt-programs.scmpuff.enable"><code class="option">programs.scmpuff.enable</code></a></span></dt><dd><p>Whether to enable scmpuff, a command line tool that allows you to work quicker with Git by
 substituting numeric shortcuts for files.</p><p><span class="emphasis"><em>Type:</em></span> boolean</p><p><span class="emphasis"><em>Default:</em></span> <code class="literal">false</code></p><p><span class="emphasis"><em>Example:</em></span> <code class="literal">true</code></p><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/programs/scmpuff.nix#blob-path" target="_top">
@@ -10190,7 +10273,7 @@ background "#cccccc"
         
         ]
     </code></p><p><span class="emphasis"><em>Example:</em></span> </p><pre class="programlisting">[
-  { event = "before-sleep"; command = "swaylock"; }
+  { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock"; }
   { event = "lock"; command = "lock"; }
 ]
 </pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/services/swayidle.nix#blob-path" target="_top">
@@ -10213,7 +10296,7 @@ background "#cccccc"
         
         ]
     </code></p><p><span class="emphasis"><em>Example:</em></span> </p><pre class="programlisting">[
-  { timeout = 60; command = "swaylock -fF"; }
+  { timeout = 60; command = "${pkgs.swaylock}/bin/swaylock -fF"; }
 ]
 </pre><p><span class="emphasis"><em>Declared by:</em></span></p><table border="0" summary="Simple list" class="simplelist"><tr><td><code class="filename"><a class="filename" href="https://github.com/nix-community/home-manager/blob/master/modules/services/swayidle.nix#blob-path" target="_top">
                     &lt;home-manager/modules/services/swayidle.nix&gt;
