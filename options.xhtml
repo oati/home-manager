@@ -362,7 +362,7 @@ null or string</p>
 string</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">&quot;‹accounts.calendar.basePath›/‹name›&quot;</code></p>
+<code class="literal">‹accounts.calendar.basePath›/‹name›</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -1502,7 +1502,7 @@ null or string</p>
 string</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">&quot;‹accounts.contact.basePath›/‹name›&quot;</code></p>
+<code class="literal">‹accounts.contact.basePath›/‹name›</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -4328,6 +4328,8 @@ attribute set of (string or signed integer or boolean or list of string)</p>
 <code class="literal">{ }</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  TLSType = &quot;IMAP&quot;;
+  TLSVersions = [ &quot;+1.3&quot; &quot;+1.2&quot; &quot;-1.1&quot; ];
   PipelineDepth = 10;
   Timeout = 60;
 };
@@ -7217,7 +7219,7 @@ null or package</p>
 <code class="literal">null</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
-<code class="literal">pkgs.gnome.adwaita-icon-theme</code></p>
+<code class="literal">pkgs.adwaita-icon-theme</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -7568,6 +7570,33 @@ null or boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/files.nix" target="_top">
+&lt;home-manager/modules/files.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-home.file._name_.force"></a><a class="term" href="options.xhtml#opt-home.file._name_.force"><code class="option">home.file.&lt;name&gt;.force</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether the target path should be unconditionally replaced
+by the managed file source. Warning, this will silently
+delete the target regardless of whether it is a file or
+link.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -8279,6 +8308,60 @@ boolean</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-home.pointerCursor.hyprcursor.enable"></a><a class="term" href="options.xhtml#opt-home.pointerCursor.hyprcursor.enable"><code class="option">home.pointerCursor.hyprcursor.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable hyprcursor config generation.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/config/home-cursor.nix" target="_top">
+&lt;home-manager/modules/config/home-cursor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-home.pointerCursor.hyprcursor.size"></a><a class="term" href="options.xhtml#opt-home.pointerCursor.hyprcursor.size"><code class="option">home.pointerCursor.hyprcursor.size</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The cursor size for hyprcursor.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or signed integer</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">32</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/config/home-cursor.nix" target="_top">
+&lt;home-manager/modules/config/home-cursor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-home.pointerCursor.name"></a><a class="term" href="options.xhtml#opt-home.pointerCursor.name"><code class="option">home.pointerCursor.name</code>
   </a>
  </span>
@@ -8492,8 +8575,9 @@ variable. In particular code like</p><pre><code class="programlisting nix">home.
   BAR = &quot;$FOO World!&quot;;
 };
 </code></pre><p>may not work as expected. If you need to reference another
-session variable, then do so inside Nix instead. The above
-example then becomes</p><pre><code class="programlisting nix">home.sessionVariables = {
+session variable (even if it is declared by using other options
+like <a class="xref" href="options.xhtml#opt-xdg.configHome"  ><code class="option">xdg.configHome</code></a>), then do so inside Nix instead.
+The above example then becomes</p><pre><code class="programlisting nix">home.sessionVariables = {
   FOO = &quot;Hello&quot;;
   BAR = &quot;${config.home.sessionVariables.FOO} World!&quot;;
 };
@@ -8572,7 +8656,7 @@ typically requires performing some manual steps, such as data
 conversion or moving files.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-one of “18.09”, “19.03”, “19.09”, “20.03”, “20.09”, “21.03”, “21.05”, “21.11”, “22.05”, “22.11”, “23.05”, “23.11”, “24.05”, “24.11”</p>
+one of “18.09”, “19.03”, “19.09”, “20.03”, “20.09”, “21.03”, “21.05”, “21.11”, “22.05”, “22.11”, “23.05”, “23.11”, “24.05”, “24.11”, “25.05”</p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -11317,6 +11401,36 @@ boolean</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-nix.gc.randomizedDelaySec"></a><a class="term" href="options.xhtml#opt-nix.gc.randomizedDelaySec"><code class="option">nix.gc.randomizedDelaySec</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Add a randomized delay before each garbage collection.
+The delay will be chosen between zero and this value.
+This value must be a time span in the format specified by
+<a class="link" href="https://www.freedesktop.org/software/systemd/man/systemd.time.html" target="_top"><span class="citerefentry"><span class="refentrytitle">systemd.time</span>(7)</span></a></p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+(optionally newline-terminated) single-line string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;0&quot;</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;45min&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/nix-gc.nix" target="_top">
+&lt;home-manager/modules/services/nix-gc.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-nix.keepOldNixPath"></a><a class="term" href="options.xhtml#opt-nix.keepOldNixPath"><code class="option">nix.keepOldNixPath</code>
   </a>
  </span>
@@ -11536,6 +11650,245 @@ attribute set of (Nix config atom (null, bool, int, float, str, path or package)
 <tr><td>
 <code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nix.nix" target="_top">
 &lt;home-manager/modules/misc/nix.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.packages"></a><a class="term" href="options.xhtml#opt-nixGL.packages"><code class="option">nixGL.packages</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The nixGL package set containing GPU library wrappers. This can be used
+to provide OpenGL and Vulkan access to applications on non-NixOS systems
+by using <code class="literal">(config.lib.nixGL.wrap &lt;package&gt;)</code> for the default wrapper, or
+<code class="literal">(config.lib.nixGL.wrappers.&lt;wrapper&gt; &lt;package&gt;)</code> for any available
+wrapper.</p><p>The wrapper functions are always available. If this option is empty (the
+default), they are a no-op. This is useful on NixOS where the wrappers
+are unnecessary.</p><p>Note that using any Nvidia wrapper requires building the configuration
+with the <code class="literal">--impure</code> option.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or (attribute set)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">inputs.nixGL.packages</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.defaultWrapper"></a><a class="term" href="options.xhtml#opt-nixGL.defaultWrapper"><code class="option">nixGL.defaultWrapper</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The package wrapper function available for use as <code class="literal">(config.lib.nixGL.wrap &lt;package&gt;)</code>. Intended to start programs on the main GPU.</p><p>Wrapper functions can be found under <code class="literal">config.lib.nixGL.wrappers</code>. They
+can be used directly, however, setting this option provides a convenient
+shorthand.</p><p>The following wrappers are available:</p><div class="itemizedlist"><ul class="itemizedlist " style="list-style-type: disc;"><li class="listitem"><p>mesa</p></li><li class="listitem"><p>mesaPrime</p></li><li class="listitem"><p>nvidia</p></li><li class="listitem"><p>nvidiaPrime</p></li></ul></div>
+
+<p><span class="emphasis"><em>Type:</em></span>
+one of “mesa”, “mesaPrime”, “nvidia”, “nvidiaPrime”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;mesa&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.installScripts"></a><a class="term" href="options.xhtml#opt-nixGL.installScripts"><code class="option">nixGL.installScripts</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>For each wrapper <code class="literal">wrp</code> named in the provided list, a wrapper script
+named <code class="literal">nixGLWrp</code> is installed into the environment. These scripts are
+useful for running programs not installed via Home Manager.</p><p>The following wrappers are available:</p><div class="itemizedlist"><ul class="itemizedlist " style="list-style-type: disc;"><li class="listitem"><p>mesa</p></li><li class="listitem"><p>mesaPrime</p></li><li class="listitem"><p>nvidia</p></li><li class="listitem"><p>nvidiaPrime</p></li></ul></div>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or (list of (one of “mesa”, “mesaPrime”, “nvidia”, “nvidiaPrime”))</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;mesa&quot;
+  &quot;mesaPrime&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.offloadWrapper"></a><a class="term" href="options.xhtml#opt-nixGL.offloadWrapper"><code class="option">nixGL.offloadWrapper</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The package wrapper function available for use as
+<code class="literal">(config.lib.nixGL.wrapOffload &lt;package&gt;)</code>. Intended to start programs
+on the secondary GPU.</p><p>Wrapper functions can be found under <code class="literal">config.lib.nixGL.wrappers</code>. They
+can be used directly, however, setting this option provides a convenient
+shorthand.</p><p>The following wrappers are available:</p><div class="itemizedlist"><ul class="itemizedlist " style="list-style-type: disc;"><li class="listitem"><p>mesa</p></li><li class="listitem"><p>mesaPrime</p></li><li class="listitem"><p>nvidia</p></li><li class="listitem"><p>nvidiaPrime</p></li></ul></div>
+
+<p><span class="emphasis"><em>Type:</em></span>
+one of “mesa”, “mesaPrime”, “nvidia”, “nvidiaPrime”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;mesaPrime&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.prime.card"></a><a class="term" href="options.xhtml#opt-nixGL.prime.card"><code class="option">nixGL.prime.card</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Selects the non-default graphics card used for PRIME render offloading.
+The value can be:</p><div class="itemizedlist"><ul class="itemizedlist " style="list-style-type: disc;"><li class="listitem"><p>a number, selecting the n-th non-default GPU;</p></li><li class="listitem"><p>a PCI bus id in the form <code class="literal">pci-XXX_YY_ZZ_U</code>;</p></li><li class="listitem"><p>a PCI id in the form <code class="literal">vendor_id:device_id</code></p></li></ul></div><p>For more information, consult the Mesa documentation on the <code class="literal">DRI_PRIME</code>
+environment variable.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;1&quot;</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;pci-0000_06_00_0&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.prime.installScript"></a><a class="term" href="options.xhtml#opt-nixGL.prime.installScript"><code class="option">nixGL.prime.installScript</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>If this option is set, the wrapper script <code class="literal">prime-offload</code> is installed
+into the environment. It allows starting programs on the secondary GPU
+selected by the <code class="literal">nixGL.prime.card</code> option. This makes sense when the
+program is not already using one of nixGL PRIME wrappers, or for
+programs not installed from Nixpkgs.</p><p>This option can be set to either “mesa” or “nvidia”, making the script
+use one or the other graphics library.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or one of “mesa”, “nvidia”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;mesa&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.prime.nvidiaProvider"></a><a class="term" href="options.xhtml#opt-nixGL.prime.nvidiaProvider"><code class="option">nixGL.prime.nvidiaProvider</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>If this option is set, it overrides the offload provider for Nvidia
+PRIME offloading. Consult the proprietary Nvidia driver documentation
+on the <code class="literal">__NV_PRIME_RENDER_OFFLOAD_PROVIDER</code> environment variable.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;NVIDIA-G0&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-nixGL.vulkan.enable"></a><a class="term" href="options.xhtml#opt-nixGL.vulkan.enable"><code class="option">nixGL.vulkan.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Vulkan in nixGL wrappers.</p><p>This is disabled by default bacause Vulkan brings in several libraries
+that can cause symbol version conflicts in wrapped programs. Your
+mileage may vary.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/nixgl.nix" target="_top">
+&lt;home-manager/modules/misc/nixgl.nix&gt;
 </a></code>
 </td></tr>
 </table>
@@ -12143,6 +12496,30 @@ boolean</p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/alot.nix" target="_top">
+&lt;home-manager/modules/programs/alot.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.alot.package"></a><a class="term" href="options.xhtml#opt-programs.alot.package"><code class="option">programs.alot.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The alot package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.alot</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -12870,6 +13247,57 @@ package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">pkgs.atuin</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/atuin.nix" target="_top">
+&lt;home-manager/modules/programs/atuin.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.atuin.daemon.enable"></a><a class="term" href="options.xhtml#opt-programs.atuin.daemon.enable"><code class="option">programs.atuin.daemon.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Atuin daemon.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/atuin.nix" target="_top">
+&lt;home-manager/modules/programs/atuin.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.atuin.daemon.logLevel"></a><a class="term" href="options.xhtml#opt-programs.atuin.daemon.logLevel"><code class="option">programs.atuin.daemon.logLevel</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Verbosity of Atuin daemon logging.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or one of “trace”, “debug”, “info”, “warn”, “error”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -17782,6 +18210,58 @@ TOML value</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.direnv.mise.enable"></a><a class="term" href="options.xhtml#opt-programs.direnv.mise.enable"><code class="option">programs.direnv.mise.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable <a class="link" href="https://mise.jdx.dev/direnv.html"  target="_top">mise</a>,
+integration of use_mise for direnv.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/direnv.nix" target="_top">
+&lt;home-manager/modules/programs/direnv.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.direnv.mise.package"></a><a class="term" href="options.xhtml#opt-programs.direnv.mise.package"><code class="option">programs.direnv.mise.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The mise package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.mise</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/direnv.nix" target="_top">
+&lt;home-manager/modules/programs/direnv.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.direnv.nix-direnv.enable"></a><a class="term" href="options.xhtml#opt-programs.direnv.nix-direnv.enable"><code class="option">programs.direnv.nix-direnv.enable</code>
   </a>
  </span>
@@ -18632,6 +19112,30 @@ package</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.eza.colors"></a><a class="term" href="options.xhtml#opt-programs.eza.colors"><code class="option">programs.eza.colors</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Use terminal colors in output (<code class="option">--color</code> argument).</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+one of &lt;null&gt;, “auto”, “always”, “never”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/eza.nix" target="_top">
+&lt;home-manager/modules/programs/eza.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.eza.extraOptions"></a><a class="term" href="options.xhtml#opt-programs.eza.extraOptions"><code class="option">programs.eza.extraOptions</code>
   </a>
  </span>
@@ -19015,7 +19519,7 @@ package</p>
 <p>Override feh’s default mouse button mapping. If you want to disable an
 action, set its value to null. If you want to bind multiple buttons to
 an action, set its value to a list.
-See <a class="link" href="https://man.finalrewind.org/1/feh/#x425554544f4e53"  target="_top">https://man.finalrewind.org/1/feh/#x425554544f4e53</a> for
+See <a class="link" href="https://man.finalrewind.org/1/feh/#BUTTONS_CONFIG_SYNTAX"  target="_top">https://man.finalrewind.org/1/feh/#BUTTONS_CONFIG_SYNTAX</a> for
 default bindings and available commands.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
@@ -19053,7 +19557,7 @@ attribute set of (null or string or signed integer or list of (string or signed 
 <p>Override feh’s default keybindings. If you want to disable a keybinding
 set its value to null. If you want to bind multiple keys to an action,
 set its value to a list.
-See <a class="link" href="https://man.finalrewind.org/1/feh/#x4b455953"  target="_top">https://man.finalrewind.org/1/feh/#x4b455953</a> for
+See <a class="link" href="https://man.finalrewind.org/1/feh/#KEYS_CONFIG_SYNTAX"  target="_top">https://man.finalrewind.org/1/feh/#KEYS_CONFIG_SYNTAX</a> for
 default bindings and available commands.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
@@ -19069,6 +19573,70 @@ attribute set of (null or string or list of string)</p>
   ];
   zoom_in = &quot;plus&quot;;
   zoom_out = &quot;minus&quot;;
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/feh.nix" target="_top">
+&lt;home-manager/modules/programs/feh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.feh.themes"></a><a class="term" href="options.xhtml#opt-programs.feh.themes"><code class="option">programs.feh.themes</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Define themes for feh.
+See <a class="link" href="https://man.finalrewind.org/1/feh/#THEMES_CONFIG_SYNTAX"  target="_top">https://man.finalrewind.org/1/feh/#THEMES_CONFIG_SYNTAX</a> for
+important guidelines and limitations related to theme configuration.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  booth = [
+    &quot;--full-screen&quot;
+    &quot;--hide-pointer&quot;
+    &quot;--slideshow-delay&quot;
+    &quot;20&quot;
+  ];
+  example = [
+    &quot;--info&quot;
+    &quot;foo bar&quot;
+  ];
+  feh = [
+    &quot;--image-bg&quot;
+    &quot;black&quot;
+  ];
+  imagemap = [
+    &quot;-rVq&quot;
+    &quot;--thumb-width&quot;
+    &quot;40&quot;
+    &quot;--thumb-height&quot;
+    &quot;30&quot;
+    &quot;--index-info&quot;
+    &quot;%n\\n%wx%h&quot;
+  ];
+  present = [
+    &quot;--full-screen&quot;
+    &quot;--sort&quot;
+    &quot;name&quot;
+    &quot;--hide-pointer&quot;
+  ];
+  webcam = [
+    &quot;--multiwindow&quot;
+    &quot;--reload&quot;
+    &quot;20&quot;
+  ];
 }
 </code></pre>
 
@@ -23680,6 +24248,33 @@ package</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.git-credential-oauth.extraFlags"></a><a class="term" href="options.xhtml#opt-programs.git-credential-oauth.extraFlags"><code class="option">programs.git-credential-oauth.extraFlags</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra command-line arguments passed to git-credential-oauth.</p><p>For valid arguments, see <span class="citerefentry"><span class="refentrytitle">git-credential-oauth</span>(1)</span>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">[ &quot;-device&quot; ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/git-credential-oauth.nix" target="_top">
+&lt;home-manager/modules/programs/git-credential-oauth.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.gitui.enable"></a><a class="term" href="options.xhtml#opt-programs.gitui.enable"><code class="option">programs.gitui.enable</code>
   </a>
  </span>
@@ -23856,7 +24451,7 @@ list of (submodule)</p>
   { package = pkgs.gnomeExtensions.dash-to-panel; }
   {
     id = &quot;user-theme@gnome-shell-extensions.gcampax.github.com&quot;;
-    package = pkgs.gnome.gnome-shell-extensions;
+    package = pkgs.gnome-shell-extensions;
   }
 ]
 
@@ -23885,7 +24480,7 @@ list of (submodule)</p>
 package</p>
 
 <p><span class="emphasis"><em>Example:</em></span>
-<code class="literal">&quot;pkgs.gnome.gnome-shell-extensions&quot;</code></p>
+<code class="literal">&quot;pkgs.gnome-shell-extensions&quot;</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -26811,7 +27406,7 @@ package</p>
 <code class="filename">$XDG_CONFIG_HOME/htop/htoprc</code>.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-attribute set</p>
+attribute set of (boolean or signed integer or string or list of (signed integer or string))</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">{ }</code></p>
@@ -29415,6 +30010,36 @@ package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">pkgs.kakoune-unwrapped</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/kakoune.nix" target="_top">
+&lt;home-manager/modules/programs/kakoune.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.kakoune.colorSchemePackage"></a><a class="term" href="options.xhtml#opt-programs.kakoune.colorSchemePackage"><code class="option">programs.kakoune.colorSchemePackage</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>A kakoune color schemes to add to your colors folder. This works
+because kakoune recursively checks
+<code class="filename">$XDG_CONFIG_HOME/kak/colors/</code>. To apply the color scheme use
+<code class="literal">programs.kakoune.config.colorScheme = &quot;theme&quot;</code>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">pkgs.kakounePlugins.kakoune-catppuccin</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -32172,6 +32797,115 @@ null or attribute sets or lists of strings</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.kubecolor.enable"></a><a class="term" href="options.xhtml#opt-programs.kubecolor.enable"><code class="option">programs.kubecolor.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable kubecolor - Colorize your kubectl output.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/kubecolor.nix" target="_top">
+&lt;home-manager/modules/programs/kubecolor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.kubecolor.enableAlias"></a><a class="term" href="options.xhtml#opt-programs.kubecolor.enableAlias"><code class="option">programs.kubecolor.enableAlias</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>When set to true, it will create an alias for kubectl pointing to
+kubecolor, thus making kubecolor the default kubectl client.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/kubecolor.nix" target="_top">
+&lt;home-manager/modules/programs/kubecolor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.kubecolor.package"></a><a class="term" href="options.xhtml#opt-programs.kubecolor.package"><code class="option">programs.kubecolor.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The kubecolor package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.kubecolor</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/kubecolor.nix" target="_top">
+&lt;home-manager/modules/programs/kubecolor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.kubecolor.settings"></a><a class="term" href="options.xhtml#opt-programs.kubecolor.settings"><code class="option">programs.kubecolor.settings</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Configuration written to <code class="filename">~/.kube/color.yaml</code> (Linux)
+or <code class="filename">Library/Application Support/kube/color.yaml</code> (Darwin).
+See <a class="link" href="https://kubecolor.github.io/reference/config/"  target="_top">https://kubecolor.github.io/reference/config/</a> for supported
+values.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+YAML value</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">kubectl = lib.getExe pkgs.kubectl
+preset = &quot;dark&quot;;
+paging = &quot;auto&quot;;
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/kubecolor.nix" target="_top">
+&lt;home-manager/modules/programs/kubecolor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.lazygit.enable"></a><a class="term" href="options.xhtml#opt-programs.lazygit.enable"><code class="option">programs.lazygit.enable</code>
   </a>
  </span>
@@ -32752,7 +33486,8 @@ attribute set of (string or signed integer or list of (string or signed integer)
  </span>
 </dt>
 <dd>
-<p>Whether to enable Librewolf browser, a privacy enhanced Firefox fork.</p>
+<p>Whether to enable LibreWolf. LibreWolf is a privacy enhanced Firefox fork.
+See <code class="literal">programs.firefox</code> for more configuration options.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 boolean</p>
@@ -32774,18 +33509,27 @@ boolean</p>
 </dd>
 <dt>
  <span class="term">
- <a id="opt-programs.librewolf.package"></a><a class="term" href="options.xhtml#opt-programs.librewolf.package"><code class="option">programs.librewolf.package</code>
+ <a id="opt-programs.librewolf.languagePacks"></a><a class="term" href="options.xhtml#opt-programs.librewolf.languagePacks"><code class="option">programs.librewolf.languagePacks</code>
   </a>
  </span>
 </dt>
 <dd>
-<p>The LibreWolf package to use.</p>
+<p>The language packs to install. Available language codes can be found
+on the releases page:
+<code class="literal">https://releases.mozilla.org/pub/firefox/releases/${version}/linux-x86_64/xpi/</code>,
+replacing <code class="literal">${version}</code> with the version of Firefox you have.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-package</p>
+list of string</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">pkgs.librewolf</code></p>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;en-GB&quot;
+  &quot;de&quot;
+]
+</code></pre>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -32803,7 +33547,7 @@ package</p>
  </span>
 </dt>
 <dd>
-<p>Attribute set of LibreWolf settings and overrides. Refer to
+<p>Attribute set of global LibreWolf settings and overrides. Refer to
 <a class="link" href="https://librewolf.net/docs/settings/"  target="_top">https://librewolf.net/docs/settings/</a>
 for details on supported values.</p>
 
@@ -33314,7 +34058,7 @@ attribute set of attribute set of (boolean or signed integer or floating point n
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
   mpv = {
     no_display = true;
-  }
+  };
 }
 
 </code></pre>
@@ -37143,6 +37887,161 @@ string</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.nh.enable"></a><a class="term" href="options.xhtml#opt-programs.nh.enable"><code class="option">programs.nh.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable nh, yet another Nix CLI helper.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix" target="_top">
+&lt;home-manager/modules/programs/nh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nh.package"></a><a class="term" href="options.xhtml#opt-programs.nh.package"><code class="option">programs.nh.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The nh package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.nh</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix" target="_top">
+&lt;home-manager/modules/programs/nh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nh.clean.enable"></a><a class="term" href="options.xhtml#opt-programs.nh.clean.enable"><code class="option">programs.nh.clean.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable periodic garbage collection for user profile and nix store with nh clean
+user.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix" target="_top">
+&lt;home-manager/modules/programs/nh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nh.clean.dates"></a><a class="term" href="options.xhtml#opt-programs.nh.clean.dates"><code class="option">programs.nh.clean.dates</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>How often cleanup is performed.</p><p>The format is described in <a class="link" href="https://www.freedesktop.org/software/systemd/man/systemd.time.html" target="_top"><span class="citerefentry"><span class="refentrytitle">systemd.time</span>(7)</span></a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+(optionally newline-terminated) single-line string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;weekly&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix" target="_top">
+&lt;home-manager/modules/programs/nh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nh.clean.extraArgs"></a><a class="term" href="options.xhtml#opt-programs.nh.clean.extraArgs"><code class="option">programs.nh.clean.extraArgs</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Options given to nh clean when the service is run automatically.</p><p>See <code class="literal">nh clean all --help</code> for more information.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+(optionally newline-terminated) single-line string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;&quot;</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;--keep 5 --keep-since 3d&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix" target="_top">
+&lt;home-manager/modules/programs/nh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nh.flake"></a><a class="term" href="options.xhtml#opt-programs.nh.flake"><code class="option">programs.nh.flake</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The path that will be used for the <code class="envar">FLAKE</code> environment variable.</p><p><code class="envar">FLAKE</code> is used by nh as the default flake for performing actions,
+like <span class="command"><strong>nh os switch</strong></span>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or path</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nh.nix" target="_top">
+&lt;home-manager/modules/programs/nh.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.nheko.enable"></a><a class="term" href="options.xhtml#opt-programs.nheko.enable"><code class="option">programs.nheko.enable</code>
   </a>
  </span>
@@ -37369,6 +38268,139 @@ package</p>
 <tr><td>
 <code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-index.nix" target="_top">
 &lt;home-manager/modules/programs/nix-index.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nix-your-shell.enable"></a><a class="term" href="options.xhtml#opt-programs.nix-your-shell.enable"><code class="option">programs.nix-your-shell.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable <span class="command"><strong>nix-your-shell</strong></span>, a wrapper for <code class="literal">nix develop</code> or <code class="literal">nix-shell</code>
+to retain the same shell inside the new environment.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-your-shell.nix" target="_top">
+&lt;home-manager/modules/programs/nix-your-shell.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nix-your-shell.enableFishIntegration"></a><a class="term" href="options.xhtml#opt-programs.nix-your-shell.enableFishIntegration"><code class="option">programs.nix-your-shell.enableFishIntegration</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Fish integration.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-your-shell.nix" target="_top">
+&lt;home-manager/modules/programs/nix-your-shell.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nix-your-shell.enableNushellIntegration"></a><a class="term" href="options.xhtml#opt-programs.nix-your-shell.enableNushellIntegration"><code class="option">programs.nix-your-shell.enableNushellIntegration</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Nushell integration.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-your-shell.nix" target="_top">
+&lt;home-manager/modules/programs/nix-your-shell.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nix-your-shell.enableZshIntegration"></a><a class="term" href="options.xhtml#opt-programs.nix-your-shell.enableZshIntegration"><code class="option">programs.nix-your-shell.enableZshIntegration</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Zsh integration.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-your-shell.nix" target="_top">
+&lt;home-manager/modules/programs/nix-your-shell.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nix-your-shell.package"></a><a class="term" href="options.xhtml#opt-programs.nix-your-shell.package"><code class="option">programs.nix-your-shell.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The nix-your-shell package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.nix-your-shell</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nix-your-shell.nix" target="_top">
+&lt;home-manager/modules/programs/nix-your-shell.nix&gt;
 </a></code>
 </td></tr>
 </table>
@@ -38314,6 +39346,33 @@ strings concatenated with “\n”</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">if source is defined, the content of source, otherwise empty</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nushell.nix" target="_top">
+&lt;home-manager/modules/programs/nushell.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.nushell.plugins"></a><a class="term" href="options.xhtml#opt-programs.nushell.plugins"><code class="option">programs.nushell.plugins</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>A list of nushell plugins to write to the plugin registry file.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">[ pkgs.nushellPlugins.formats ]</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -45250,6 +46309,51 @@ package</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.spotify-player.actions"></a><a class="term" href="options.xhtml#opt-programs.spotify-player.actions"><code class="option">programs.spotify-player.actions</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Configuration written to the <code class="literal">actions</code> field of
+<code class="filename">$XDG_CONFIG_HOME/spotify-player/keymap.toml</code>.</p><p>See
+<a class="link" href="https://github.com/aome510/spotify-player/blob/master/docs/config.md#actions"  target="_top">https://github.com/aome510/spotify-player/blob/master/docs/config.md#actions</a>
+for the full list of options.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of (TOML value)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  {
+    action = &quot;GoToArtist&quot;;
+    key_sequence = &quot;g A&quot;;
+  }
+  {
+    action = &quot;GoToAlbum&quot;;
+    key_sequence = &quot;g B&quot;;
+    target = &quot;PlayingTrack&quot;;
+  }
+  {
+    action = &quot;ToggleLiked&quot;;
+    key_sequence = &quot;C-l&quot;;
+  }
+]
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/spotify-player.nix" target="_top">
+&lt;home-manager/modules/programs/spotify-player.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.spotify-player.keymaps"></a><a class="term" href="options.xhtml#opt-programs.spotify-player.keymaps"><code class="option">programs.spotify-player.keymaps</code>
   </a>
  </span>
@@ -46869,6 +47973,31 @@ boolean</p>
 <code class="literal">true</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/starship.nix" target="_top">
+&lt;home-manager/modules/programs/starship.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.starship.enableInteractive"></a><a class="term" href="options.xhtml#opt-programs.starship.enableInteractive"><code class="option">programs.starship.enableInteractive</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Only enable starship when the shell is interactive. This option is only
+valid for the Fish shell.</p><p>Some plugins require this to be set to <code class="literal">false</code> to function correctly.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">true</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
@@ -50323,6 +51452,31 @@ strings concatenated with “\n”</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.tmux.focusEvents"></a><a class="term" href="options.xhtml#opt-programs.tmux.focusEvents"><code class="option">programs.tmux.focusEvents</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>On supported terminals, request focus events and pass them through to
+applications running in tmux.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/tmux.nix" target="_top">
+&lt;home-manager/modules/programs/tmux.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.tmux.historyLimit"></a><a class="term" href="options.xhtml#opt-programs.tmux.historyLimit"><code class="option">programs.tmux.historyLimit</code>
   </a>
  </span>
@@ -50589,7 +51743,7 @@ is possible to override the sensible settings using the
 boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">true</code></p>
+<code class="literal">false</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -53846,7 +55000,7 @@ boolean</p>
 boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">false</code></p>
+<code class="literal">true</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
@@ -53873,7 +55027,7 @@ boolean</p>
 boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">false</code></p>
+<code class="literal">true</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
@@ -53900,7 +55054,7 @@ boolean</p>
 boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">false</code></p>
+<code class="literal">true</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
@@ -53927,7 +55081,7 @@ boolean</p>
 boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">false</code></p>
+<code class="literal">true</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
@@ -54043,16 +55197,16 @@ TOML value</p>
 <code class="literal">{ }</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
-  input.keymap = [
-    { exec = &quot;close&quot;; on = [ &quot;&lt;C-q&gt;&quot; ]; }
-    { exec = &quot;close --submit&quot;; on = [ &quot;&lt;Enter&gt;&quot; ]; }
-    { exec = &quot;escape&quot;; on = [ &quot;&lt;Esc&gt;&quot; ]; }
-    { exec = &quot;backspace&quot;; on = [ &quot;&lt;Backspace&gt;&quot; ]; }
+  input.prepend_keymap = [
+    { run = &quot;close&quot;; on = [ &quot;&lt;C-q&gt;&quot; ]; }
+    { run = &quot;close --submit&quot;; on = [ &quot;&lt;Enter&gt;&quot; ]; }
+    { run = &quot;escape&quot;; on = [ &quot;&lt;Esc&gt;&quot; ]; }
+    { run = &quot;backspace&quot;; on = [ &quot;&lt;Backspace&gt;&quot; ]; }
   ];
-  manager.keymap = [
-    { exec = &quot;escape&quot;; on = [ &quot;&lt;Esc&gt;&quot; ]; }
-    { exec = &quot;quit&quot;; on = [ &quot;q&quot; ]; }
-    { exec = &quot;close&quot;; on = [ &quot;&lt;C-q&gt;&quot; ]; }
+  manager.prepend_keymap = [
+    { run = &quot;escape&quot;; on = [ &quot;&lt;Esc&gt;&quot; ]; }
+    { run = &quot;quit&quot;; on = [ &quot;q&quot; ]; }
+    { run = &quot;close&quot;; on = [ &quot;&lt;C-q&gt;&quot; ]; }
   ];
 }
 
@@ -54697,6 +55851,33 @@ list of string</p>
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[ &quot;swift&quot; &quot;nix&quot; &quot;xy-zed&quot; ]
 
 </code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/zed-editor.nix" target="_top">
+&lt;home-manager/modules/programs/zed-editor.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.zed-editor.extraPackages"></a><a class="term" href="options.xhtml#opt-programs.zed-editor.extraPackages"><code class="option">programs.zed-editor.extraPackages</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra packages available to Zed.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">[ pkgs.nixd ]</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -55514,7 +56695,8 @@ null or string</p>
 The strategies in the array are tried successively until a suggestion is found.
 There are currently three built-in strategies to choose from:</p><div class="itemizedlist"><ul class="itemizedlist " style="list-style-type: disc;"><li class="listitem"><p><code class="literal">history</code>: Chooses the most recent match from history.</p></li><li class="listitem"><p><code class="literal">completion</code>: Chooses a suggestion based on what tab-completion would suggest. (requires <code class="literal">zpty</code> module)</p></li><li class="listitem"><p><code class="literal">match_prev_cmd</code>: Like <code class="literal">history</code>, but chooses the most recent match whose preceding history item matches
 the most recently executed command. Note that this strategy won’t work as expected with ZSH options that
-don’t preserve the history order such as <code class="literal">HIST_IGNORE_ALL_DUPS</code> or <code class="literal">HIST_EXPIRE_DUPS_FIRST</code>.</p></li></ul></div>
+don’t preserve the history order such as <code class="literal">HIST_IGNORE_ALL_DUPS</code> or <code class="literal">HIST_EXPIRE_DUPS_FIRST</code>.</p></li></ul></div><p>Setting the option to an empty list <code class="literal">[]</code> will make ZSH_AUTOSUGGESTION_STRATEGY not be set automatically,
+allowing the variable to be declared in <code class="option">programs.zsh.localVariables</code> or <code class="option">programs.zsh.sessionVariables</code></p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 list of (one of “history”, “completion”, “match_prev_cmd”)</p>
@@ -58160,6 +59342,30 @@ boolean</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.zsh.zsh-abbr.package"></a><a class="term" href="options.xhtml#opt-programs.zsh.zsh-abbr.package"><code class="option">programs.zsh.zsh-abbr.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The zsh-abbr package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.zsh-abbr</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/zsh/zsh-abbr.nix" target="_top">
+&lt;home-manager/modules/programs/zsh/zsh-abbr.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.zsh.zsh-abbr.abbreviations"></a><a class="term" href="options.xhtml#opt-programs.zsh.zsh-abbr.abbreviations"><code class="option">programs.zsh.zsh-abbr.abbreviations</code>
   </a>
  </span>
@@ -58224,8 +59430,8 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>A set of values to be modified by <span class="command"><strong>kwriteconfig5</strong></span>.</p><p>The example value would cause the following command to run in the
-activation script:</p><pre><code class="programlisting  shell">kwriteconfig5 --file $XDG_CONFIG_HOME/powermanagementprofilesrc \
+<p>A set of values to be modified by <span class="command"><strong>kwriteconfig6</strong></span>.</p><p>The example value would cause the following command to run in the
+activation script:</p><pre><code class="programlisting  shell">kwriteconfig6 --file $XDG_CONFIG_HOME/powermanagementprofilesrc \
               --group AC \
               --group HandleButtonEvents \
               --group lidAction \
@@ -60888,7 +62094,7 @@ submodule</p>
 package</p>
 
 <p><span class="emphasis"><em>Example:</em></span>
-<code class="literal">pkgs.gnome.adwaita-icon-theme</code></p>
+<code class="literal">pkgs.adwaita-icon-theme</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -61672,7 +62878,7 @@ package</p>
 string</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">&quot;https://api.etesync.com/&quot;</code></p>
+<code class="literal">&quot;https://api.etebase.com/partner/etesync/&quot;</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -62625,6 +63831,16 @@ package</p>
 <p><span class="emphasis"><em>Type:</em></span>
 attribute set of (submodule)</p>
 
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  xyz = {
+    path = &quot;${config.home.homeDirectory}/foo/home-manager&quot;;
+    uri = &quot;git@github.com:nix-community/home-manager.git&quot;;
+    interval = 1000;
+  };
+}
+
+</code></pre>
+
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
 <tr><td>
@@ -63285,13 +64501,10 @@ null or signed integer</p>
  </span>
 </dt>
 <dd>
-<p>Which pinentry interface to use. If not
-<code class="literal">null</code>, it sets
-<code class="option">pinentry-program</code> in
-<code class="filename">gpg-agent.conf</code>. Beware that
-<code class="literal">pinentry-gnome3</code> may not work on non-Gnome
-systems. You can fix it by adding the following to your
-system configuration:</p><pre><code class="programlisting nix">services.dbus.packages = [ pkgs.gcr ];
+<p>Which pinentry interface to use. If not <code class="literal">null</code>, it sets
+<code class="option">pinentry-program</code> in <code class="filename">gpg-agent.conf</code>. Beware that
+<code class="literal">pinentry-gnome3</code> may not work on non-GNOME systems. You can fix it by
+adding the following to your configuration:</p><pre><code class="programlisting nix">home.packages = [ pkgs.gcr ];
 </code></pre>
 
 <p><span class="emphasis"><em>Type:</em></span>
@@ -64425,6 +65638,30 @@ package</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-services.imapnotify.path"></a><a class="term" href="options.xhtml#opt-services.imapnotify.path"><code class="option">services.imapnotify.path</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>List of packages to provide in PATH for the imapnotify service.</p><p>Note, this does not apply to the Darwin launchd service.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/imapnotify.nix" target="_top">
+&lt;home-manager/modules/services/imapnotify.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-services.kanshi.enable"></a><a class="term" href="options.xhtml#opt-services.kanshi.enable"><code class="option">services.kanshi.enable</code>
   </a>
  </span>
@@ -65427,10 +66664,10 @@ boolean</p>
 package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">&lt;derivation kdeconnect-kde-23.08.5&gt;</code></p>
+<code class="literal">&lt;derivation kdeconnect-kde-24.12.0&gt;</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span>
-<code class="literal">pkgs.kdePackages.kdeconnect-kde</code></p>
+<code class="literal">pkgs.plasma5Packages.kdeconnect-kde</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -69389,6 +70626,1232 @@ JSON value</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-services.podman.enable"></a><a class="term" href="options.xhtml#opt-services.podman.enable"><code class="option">services.podman.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Podman, a daemonless container engine.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.enableTypeChecks"></a><a class="term" href="options.xhtml#opt-services.podman.enableTypeChecks"><code class="option">services.podman.enableTypeChecks</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable type checks for podman quadlets.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/options.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/options.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.package"></a><a class="term" href="options.xhtml#opt-services.podman.package"><code class="option">services.podman.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The podman package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.podman</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/options.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/options.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.autoUpdate.enable"></a><a class="term" href="options.xhtml#opt-services.podman.autoUpdate.enable"><code class="option">services.podman.autoUpdate.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Automatically update the podman images.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/services.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/services.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.autoUpdate.onCalendar"></a><a class="term" href="options.xhtml#opt-services.podman.autoUpdate.onCalendar"><code class="option">services.podman.autoUpdate.onCalendar</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The systemd <code class="literal">OnCalendar</code> expression for the update. See
+<a class="link" href="https://www.freedesktop.org/software/systemd/man/systemd.time.html" target="_top"><span class="citerefentry"><span class="refentrytitle">systemd.time</span>(7)</span></a> for a description of the format.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;Sun *-*-* 00:00&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/services.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/services.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers"></a><a class="term" href="options.xhtml#opt-services.podman.containers"><code class="option">services.podman.containers</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Defines Podman container quadlet configurations.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (submodule)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.addCapabilities"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.addCapabilities"><code class="option">services.podman.containers.&lt;name&gt;.addCapabilities</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The capabilities to add to the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;CAP_DAC_OVERRIDE&quot;
+  &quot;CAP_IPC_OWNER&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.autoStart"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.autoStart"><code class="option">services.podman.containers.&lt;name&gt;.autoStart</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to start the container on boot (requires user lingering).</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.autoUpdate"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.autoUpdate"><code class="option">services.podman.containers.&lt;name&gt;.autoUpdate</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The autoupdate policy for the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+one of &lt;null&gt;, “registry”, “local”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;registry&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.description"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.description"><code class="option">services.podman.containers.&lt;name&gt;.description</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The description of the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;My Container&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.devices"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.devices"><code class="option">services.podman.containers.&lt;name&gt;.devices</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The devices to mount into the container</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;/dev/&lt;host&gt;:/dev/&lt;container&gt;&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.dropCapabilities"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.dropCapabilities"><code class="option">services.podman.containers.&lt;name&gt;.dropCapabilities</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The capabilities to drop from the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;CAP_DAC_OVERRIDE&quot;
+  &quot;CAP_IPC_OWNER&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.entrypoint"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.entrypoint"><code class="option">services.podman.containers.&lt;name&gt;.entrypoint</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The container entrypoint.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;/foo.sh&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.environment"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.environment"><code class="option">services.podman.containers.&lt;name&gt;.environment</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Environment variables to set in the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (null or boolean or signed integer or string or path or list of (null or boolean or signed integer or string or path))</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  VAR1 = &quot;0:100&quot;;
+  VAR2 = true;
+  VAR3 = 5;
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.environmentFile"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.environmentFile"><code class="option">services.podman.containers.&lt;name&gt;.environmentFile</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Paths to files containing container environment variables.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;/etc/environment&quot;
+  &quot;/etc/other-env&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.exec"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.exec"><code class="option">services.podman.containers.&lt;name&gt;.exec</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The command to run after the container start.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;sleep inf&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.extraConfig"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.extraConfig"><code class="option">services.podman.containers.&lt;name&gt;.extraConfig</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>INI sections and values to populate the Container Quadlet.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of attribute set of ((attribute set of (null or boolean or signed integer or string or path or list of (null or boolean or signed integer or string or path))) or list of (null or boolean or signed integer or string or path) or null or boolean or signed integer or string or path)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  Container = {
+    User = 1000;
+  };
+  Service = {
+    TimeoutStartSec = 15;
+  };
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.extraPodmanArgs"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.extraPodmanArgs"><code class="option">services.podman.containers.&lt;name&gt;.extraPodmanArgs</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra arguments to pass to the podman run command.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;--security-opt=no-new-privileges&quot;
+  &quot;--security-opt=seccomp=unconfined&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.group"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.group"><code class="option">services.podman.containers.&lt;name&gt;.group</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The group ID inside the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or signed integer or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.image"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.image"><code class="option">services.podman.containers.&lt;name&gt;.image</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The container image.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;registry.access.redhat.com/ubi9-minimal:latest&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.ip4"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.ip4"><code class="option">services.podman.containers.&lt;name&gt;.ip4</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Set an IPv4 address for the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.ip6"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.ip6"><code class="option">services.podman.containers.&lt;name&gt;.ip6</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Set an IPv6 address for the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.labels"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.labels"><code class="option">services.podman.containers.&lt;name&gt;.labels</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The labels to apply to the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  app = &quot;myapp&quot;;
+  some-label = &quot;somelabel&quot;;
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.network"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.network"><code class="option">services.podman.containers.&lt;name&gt;.network</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The network mode or network/s to connect the container to. Equivalent
+to <code class="literal">podman run --network=&lt;option&gt;</code>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string or list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;host&quot;</code>
+or
+<code class="literal">&quot;bridge_network_1&quot;</code>
+or
+<code class="literal">[ &quot;bridge_network_1&quot; &quot;bridge_network_2&quot; ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.networkAlias"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.networkAlias"><code class="option">services.podman.containers.&lt;name&gt;.networkAlias</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Network aliases for the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;mycontainer&quot;
+  &quot;web&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.ports"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.ports"><code class="option">services.podman.containers.&lt;name&gt;.ports</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>A mapping of ports between host and container</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;8080:80&quot;
+  &quot;8443:443&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.user"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.user"><code class="option">services.podman.containers.&lt;name&gt;.user</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The user ID inside the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or signed integer or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.userNS"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.userNS"><code class="option">services.podman.containers.&lt;name&gt;.userNS</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Use a user namespace for the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.containers._name_.volumes"></a><a class="term" href="options.xhtml#opt-services.podman.containers._name_.volumes"><code class="option">services.podman.containers.&lt;name&gt;.volumes</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The volumes to mount into the container.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;/tmp:/tmp&quot;
+  &quot;/var/run/test.secret:/etc/secret:ro&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/containers.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/containers.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks"></a><a class="term" href="options.xhtml#opt-services.podman.networks"><code class="option">services.podman.networks</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Defines Podman network quadlet configurations.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (submodule)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.autoStart"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.autoStart"><code class="option">services.podman.networks.&lt;name&gt;.autoStart</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to start the network on boot (requires user lingering).</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.description"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.description"><code class="option">services.podman.networks.&lt;name&gt;.description</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The description of the network.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;My Network&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.driver"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.driver"><code class="option">services.podman.networks.&lt;name&gt;.driver</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The network driver to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;bridge&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.extraConfig"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.extraConfig"><code class="option">services.podman.networks.&lt;name&gt;.extraConfig</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>INI sections and values to populate the Network Quadlet</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of attribute set of ((attribute set of (null or boolean or signed integer or string or path or list of (null or boolean or signed integer or string or path))) or list of (null or boolean or signed integer or string or path) or null or boolean or signed integer or string or path)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  Network = {
+    ContainerConfModule = &quot;/etc/nvd.conf&quot;;
+  };
+  Service = {
+    TimeoutStartSec = 30;
+  };
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.extraPodmanArgs"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.extraPodmanArgs"><code class="option">services.podman.networks.&lt;name&gt;.extraPodmanArgs</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra arguments to pass to the podman network create command.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  &quot;--dns=192.168.55.1&quot;
+  &quot;--ipam-driver&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.gateway"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.gateway"><code class="option">services.podman.networks.&lt;name&gt;.gateway</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The gateway IP to use for the network.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;192.168.20.1&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.internal"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.internal"><code class="option">services.podman.networks.&lt;name&gt;.internal</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether the network should be internal</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.labels"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.labels"><code class="option">services.podman.networks.&lt;name&gt;.labels</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The labels to apply to the network.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  app = &quot;myapp&quot;;
+  some-label = &quot;somelabel&quot;;
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.networks._name_.subnet"></a><a class="term" href="options.xhtml#opt-services.podman.networks._name_.subnet"><code class="option">services.podman.networks.&lt;name&gt;.subnet</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The subnet to use for the network.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;192.168.20.0/24&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux/networks.nix" target="_top">
+&lt;home-manager/modules/services/podman-linux/networks.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.settings.containers"></a><a class="term" href="options.xhtml#opt-services.podman.settings.containers"><code class="option">services.podman.settings.containers</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>containers.conf configuration</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+TOML value</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.settings.policy"></a><a class="term" href="options.xhtml#opt-services.podman.settings.policy"><code class="option">services.podman.settings.policy</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Signature verification policy file.
+If this option is empty the default policy file from
+<code class="literal">skopeo</code> will be used.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  default = [ { type = &quot;insecureAcceptAnything&quot;; } ];
+  transports = {
+    docker-daemon = {
+      &quot;&quot; = [ { type = &quot;insecureAcceptAnything&quot;; } ];
+    };
+  };
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.settings.registries.block"></a><a class="term" href="options.xhtml#opt-services.podman.settings.registries.block"><code class="option">services.podman.settings.registries.block</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>List of blocked repositories.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.settings.registries.insecure"></a><a class="term" href="options.xhtml#opt-services.podman.settings.registries.insecure"><code class="option">services.podman.settings.registries.insecure</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>List of insecure repositories.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.settings.registries.search"></a><a class="term" href="options.xhtml#opt-services.podman.settings.registries.search"><code class="option">services.podman.settings.registries.search</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>List of repositories to search.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">[
+  &quot;docker.io&quot;
+]
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.podman.settings.storage"></a><a class="term" href="options.xhtml#opt-services.podman.settings.storage"><code class="option">services.podman.settings.storage</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>storage.conf configuration</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+TOML value</p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/podman-linux" target="_top">
+&lt;home-manager/modules/services/podman-linux&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-services.polybar.enable"></a><a class="term" href="options.xhtml#opt-services.polybar.enable"><code class="option">services.polybar.enable</code>
   </a>
  </span>
@@ -72196,7 +74659,9 @@ attribute set of (null or string or path)</p>
  </span>
 </dt>
 <dd>
-<p>Whether to enable Syncthing continuous file synchronization.</p>
+<p>Whether to enable Syncthing, a self-hosted open-source alternative to Dropbox and Bittorrent Sync.
+Further declarative configuration options only supported on Linux devices.
+.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 boolean</p>
@@ -72218,12 +74683,91 @@ boolean</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-services.syncthing.package"></a><a class="term" href="options.xhtml#opt-services.syncthing.package"><code class="option">services.syncthing.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The syncthing package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.syncthing</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.allProxy"></a><a class="term" href="options.xhtml#opt-services.syncthing.allProxy"><code class="option">services.syncthing.allProxy</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Overwrites the <code class="envar">all_proxy</code> environment variable for the Syncthing
+process to the given value. This is normally used to let Syncthing
+connect through a SOCKS5 proxy server. See
+<a class="link" href="https://docs.syncthing.net/users/proxying.html"  target="_top">https://docs.syncthing.net/users/proxying.html</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">&quot;socks5://address.com:1234&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.cert"></a><a class="term" href="options.xhtml#opt-services.syncthing.cert"><code class="option">services.syncthing.cert</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Path to the <code class="literal">cert.pem</code> file, which will be copied into Syncthing’s
+config directory.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-services.syncthing.extraOptions"></a><a class="term" href="options.xhtml#opt-services.syncthing.extraOptions"><code class="option">services.syncthing.extraOptions</code>
   </a>
  </span>
 </dt>
 <dd>
-<p>Extra command-line arguments to pass to <span class="command"><strong>syncthing</strong></span>.</p>
+<p>Extra command-line arguments to pass to <span class="command"><strong>syncthing</strong></span></p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 list of string</p>
@@ -72232,9 +74776,764 @@ list of string</p>
 <code class="literal">[ ]</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
-  &quot;--gui-apikey=apiKey&quot;
+  &quot;--reset-deltas&quot;
 ]
 </code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.guiAddress"></a><a class="term" href="options.xhtml#opt-services.syncthing.guiAddress"><code class="option">services.syncthing.guiAddress</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The address to serve the web interface at.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;127.0.0.1:8384&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.key"></a><a class="term" href="options.xhtml#opt-services.syncthing.key"><code class="option">services.syncthing.key</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Path to the <code class="literal">key.pem</code> file, which will be copied into Syncthing’s
+config directory.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.overrideDevices"></a><a class="term" href="options.xhtml#opt-services.syncthing.overrideDevices"><code class="option">services.syncthing.overrideDevices</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to delete the devices which are not configured via the
+<a class="link" href="options.xhtml#opt-services.syncthing.settings.devices"  >devices</a> option.
+If set to <code class="literal">false</code>, devices added via the web
+interface will persist and will have to be deleted manually.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.overrideFolders"></a><a class="term" href="options.xhtml#opt-services.syncthing.overrideFolders"><code class="option">services.syncthing.overrideFolders</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to delete the folders which are not configured via the
+<a class="link" href="options.xhtml#opt-services.syncthing.settings.folders"  >folders</a> option.
+If set to <code class="literal">false</code>, folders added via the web
+interface will persist and will have to be deleted manually.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.passwordFile"></a><a class="term" href="options.xhtml#opt-services.syncthing.passwordFile"><code class="option">services.syncthing.passwordFile</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Path to the gui password file.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or path</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings"><code class="option">services.syncthing.settings</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra configuration options for Syncthing.
+See <a class="link" href="https://docs.syncthing.net/users/config.html"  target="_top">https://docs.syncthing.net/users/config.html</a>.
+Note that this attribute set does not exactly match the documented
+XML format. Instead, this is the format of the JSON REST API. There
+are slight differences. For example, this XML:</p><pre><code class="programlisting xml">&lt;options&gt;
+  &lt;listenAddress&gt;default&lt;/listenAddress&gt;
+  &lt;minHomeDiskFree unit=&quot;%&quot;&gt;1&lt;/minHomeDiskFree&gt;
+&lt;/options&gt;
+</code></pre><p>corresponds to the Nix code:</p><pre><code class="programlisting nix">{
+  options = {
+    listenAddresses = [
+      &quot;default&quot;
+    ];
+    minHomeDiskFree = {
+      unit = &quot;%&quot;;
+      value = 1;
+    };
+  };
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Type:</em></span>
+JSON value</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  gui = {
+    theme = &quot;black&quot;;
+  };
+  options = {
+    localAnnounceEnabled = false;
+  };
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.devices"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.devices"><code class="option">services.syncthing.settings.devices</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Peers/devices which Syncthing should communicate with.</p><p>Note that you can still add devices manually, but those changes
+will be reverted on restart if <a class="link" href="options.xhtml#opt-services.syncthing.overrideDevices"  >overrideDevices</a>
+is enabled.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (JSON value)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  bigbox = {
+    addresses = [
+      &quot;tcp://192.168.0.10:51820&quot;
+    ];
+    id = &quot;7CFNTQM-IMTJBHJ-3UWRDIU-ZGQJFR6-VCXZ3NB-XUH3KZO-N52ITXR-LAIYUAU&quot;;
+  };
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.devices._name_.autoAcceptFolders"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.devices._name_.autoAcceptFolders"><code class="option">services.syncthing.settings.devices.&lt;name&gt;.autoAcceptFolders</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Automatically create or share folders that this device advertises at the default path.
+See <a class="link" href="https://docs.syncthing.net/users/config.html?highlight=autoaccept#config-file-format"  target="_top">https://docs.syncthing.net/users/config.html?highlight=autoaccept#config-file-format</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.devices._name_.id"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.devices._name_.id"><code class="option">services.syncthing.settings.devices.&lt;name&gt;.id</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The device ID. See <a class="link" href="https://docs.syncthing.net/dev/device-ids.html"  target="_top">https://docs.syncthing.net/dev/device-ids.html</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.devices._name_.name"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.devices._name_.name"><code class="option">services.syncthing.settings.devices.&lt;name&gt;.name</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The name of the device.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;‹name›&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders"><code class="option">services.syncthing.settings.folders</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Folders which should be shared by Syncthing.</p><p>Note that you can still add folders manually, but those changes
+will be reverted on restart if <a class="link" href="options.xhtml#opt-services.syncthing.overrideFolders"  >overrideFolders</a>
+is enabled.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (JSON value)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  &quot;/home/user/sync&quot; = {
+    id = &quot;syncme&quot;;
+    devices = [ &quot;bigbox&quot; ];
+  };
+}
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.enable"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.enable"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to share this folder.
+This option is useful when you want to define all folders
+in one place, but not every machine should share all folders.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.copyOwnershipFromParent"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.copyOwnershipFromParent"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.copyOwnershipFromParent</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>On Unix systems, tries to copy file/folder ownership from
+the parent directory (the directory it’s located in).
+Requires running Syncthing as a privileged user, or
+granting it additional capabilities (e.g. CAP_CHOWN on
+Linux).</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.devices"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.devices"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.devices</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The devices this folder should be shared with. Each device must
+be defined in the <a class="link" href="options.xhtml#opt-services.syncthing.settings.devices"  >devices</a> option.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+list of string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.id"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.id"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.id</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The ID of the folder. Must be the same on all devices.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;‹name›&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.label"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.label"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.label</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The label of the folder.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;‹name›&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.path"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.path"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.path</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The path to the folder which should be shared.
+Only absolute paths (starting with <code class="literal">/</code>) and paths relative to
+the user’s home directory (starting with <code class="literal">~/</code>) are allowed.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+string starting with / or ~/</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;‹name›&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.type"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.type"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.type</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Controls how the folder is handled by Syncthing.
+See <a class="link" href="https://docs.syncthing.net/users/config.html#config-option-folder.type"  target="_top">https://docs.syncthing.net/users/config.html#config-option-folder.type</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+one of “sendreceive”, “sendonly”, “receiveonly”, “receiveencrypted”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;sendreceive&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.versioning"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.versioning"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.versioning</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>How to keep changed/deleted files with Syncthing.
+There are 4 different types of versioning with different parameters.
+See <a class="link" href="https://docs.syncthing.net/users/versioning.html"  target="_top">https://docs.syncthing.net/users/versioning.html</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or (JSON value)</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">[
+  {
+    versioning = {
+      type = &quot;simple&quot;;
+      params.keep = &quot;10&quot;;
+    };
+  }
+  {
+    versioning = {
+      type = &quot;trashcan&quot;;
+      params.cleanoutDays = &quot;1000&quot;;
+    };
+  }
+  {
+    versioning = {
+      type = &quot;staggered&quot;;
+      fsPath = &quot;/syncthing/backup&quot;;
+      params = {
+        cleanInterval = &quot;3600&quot;;
+        maxAge = &quot;31536000&quot;;
+      };
+    };
+  }
+  {
+    versioning = {
+      type = &quot;external&quot;;
+      params.versionsPath = pkgs.writers.writeBash &quot;backup&quot; &#x27;&#x27;
+        folderpath=&quot;$1&quot;
+        filepath=&quot;$2&quot;
+        rm -rf &quot;$folderpath/$filepath&quot;
+      &#x27;&#x27;;
+    };
+  }
+]
+
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.folders._name_.versioning.type"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.folders._name_.versioning.type"><code class="option">services.syncthing.settings.folders.&lt;name&gt;.versioning.type</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The type of versioning.
+See <a class="link" href="https://docs.syncthing.net/users/versioning.html"  target="_top">https://docs.syncthing.net/users/versioning.html</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+one of “external”, “simple”, “staggered”, “trashcan”</p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options"><code class="option">services.syncthing.settings.options</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The options element contains all other global configuration options</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+JSON value</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options.limitBandwidthInLan"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options.limitBandwidthInLan"><code class="option">services.syncthing.settings.options.limitBandwidthInLan</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to apply bandwidth limits to devices in the same broadcast domain as the local device.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options.localAnnounceEnabled"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options.localAnnounceEnabled"><code class="option">services.syncthing.settings.options.localAnnounceEnabled</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to send announcements to the local LAN, also use such announcements to find other devices.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options.localAnnouncePort"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options.localAnnouncePort"><code class="option">services.syncthing.settings.options.localAnnouncePort</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The port on which to listen and send IPv4 broadcast announcements to.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or signed integer</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options.maxFolderConcurrency"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options.maxFolderConcurrency"><code class="option">services.syncthing.settings.options.maxFolderConcurrency</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>This option controls how many folders may concurrently be in I/O-intensive operations such as syncing or scanning.
+The mechanism is described in detail in a <a class="link" href="https://docs.syncthing.net/advanced/option-max-concurrency.html"  target="_top">separate chapter</a>.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or signed integer</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options.relaysEnabled"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options.relaysEnabled"><code class="option">services.syncthing.settings.options.relaysEnabled</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>When true, relays will be connected to and potentially used for device to device connections.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/syncthing.nix" target="_top">
+&lt;home-manager/modules/services/syncthing.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.syncthing.settings.options.urAccepted"></a><a class="term" href="options.xhtml#opt-services.syncthing.settings.options.urAccepted"><code class="option">services.syncthing.settings.options.urAccepted</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether the user has accepted to submit anonymous usage data.
+The default, 0, mean the user has not made a choice, and Syncthing will ask at some point in the future.
+“-1” means no, a number above zero means that that version of usage reporting has been accepted.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+null or signed integer</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">null</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -81699,6 +84998,33 @@ null or boolean</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-xdg.configFile._name_.force"></a><a class="term" href="options.xhtml#opt-xdg.configFile._name_.force"><code class="option">xdg.configFile.&lt;name&gt;.force</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether the target path should be unconditionally replaced
+by the managed file source. Warning, this will silently
+delete the target regardless of whether it is a file or
+link.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/xdg.nix" target="_top">
+&lt;home-manager/modules/misc/xdg.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-xdg.configFile._name_.onChange"></a><a class="term" href="options.xhtml#opt-xdg.configFile._name_.onChange"><code class="option">xdg.configFile.&lt;name&gt;.onChange</code>
   </a>
  </span>
@@ -81920,6 +85246,33 @@ null or boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/xdg.nix" target="_top">
+&lt;home-manager/modules/misc/xdg.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-xdg.dataFile._name_.force"></a><a class="term" href="options.xhtml#opt-xdg.dataFile._name_.force"><code class="option">xdg.dataFile.&lt;name&gt;.force</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether the target path should be unconditionally replaced
+by the managed file source. Warning, this will silently
+delete the target regardless of whether it is a file or
+link.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -82981,6 +86334,33 @@ null or boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">null</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/misc/xdg.nix" target="_top">
+&lt;home-manager/modules/misc/xdg.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-xdg.stateFile._name_.force"></a><a class="term" href="options.xhtml#opt-xdg.stateFile._name_.force"><code class="option">xdg.stateFile.&lt;name&gt;.force</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether the target path should be unconditionally replaced
+by the managed file source. Warning, this will silently
+delete the target regardless of whether it is a file or
+link.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
