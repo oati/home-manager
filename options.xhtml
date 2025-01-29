@@ -20420,6 +20420,34 @@ string</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.firefox.profiles._name_.preConfig"></a><a class="term" href="options.xhtml#opt-programs.firefox.profiles._name_.preConfig"><code class="option">programs.firefox.profiles.&lt;name&gt;.preConfig</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra preferences to add to <code class="filename">user.js</code>, before
+<a class="xref" href="options.xhtml#opt-programs.firefox.profiles._name_.settings"  ><code class="option">programs.firefox.profiles.&lt;name&gt;.settings</code></a>.</p><p>Use <a class="xref" href="options.xhtml#opt-programs.firefox.profiles._name_.extraConfig"  ><code class="option">programs.firefox.profiles.&lt;name&gt;.extraConfig</code></a>, unless
+you want to overwrite in
+<a class="xref" href="options.xhtml#opt-programs.firefox.profiles._name_.settings"  ><code class="option">programs.firefox.profiles.&lt;name&gt;.settings</code></a>, then use this
+option.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+strings concatenated with “\n”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/firefox.nix" target="_top">
+&lt;home-manager/modules/programs/firefox.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.firefox.profiles._name_.search"></a><a class="term" href="options.xhtml#opt-programs.firefox.profiles._name_.search"><code class="option">programs.firefox.profiles.&lt;name&gt;.search</code>
   </a>
  </span>
@@ -21725,6 +21753,34 @@ string</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">&quot;‹name›&quot;</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/floorp.nix" target="_top">
+&lt;home-manager/modules/programs/floorp.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-programs.floorp.profiles._name_.preConfig"></a><a class="term" href="options.xhtml#opt-programs.floorp.profiles._name_.preConfig"><code class="option">programs.floorp.profiles.&lt;name&gt;.preConfig</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Extra preferences to add to <code class="filename">user.js</code>, before
+<a class="xref" href="options.xhtml#opt-programs.firefox.profiles._name_.settings"  ><code class="option">programs.firefox.profiles.&lt;name&gt;.settings</code></a>.</p><p>Use <a class="xref" href="options.xhtml#opt-programs.firefox.profiles._name_.extraConfig"  ><code class="option">programs.firefox.profiles.&lt;name&gt;.extraConfig</code></a>, unless
+you want to overwrite in
+<a class="xref" href="options.xhtml#opt-programs.firefox.profiles._name_.settings"  ><code class="option">programs.firefox.profiles.&lt;name&gt;.settings</code></a>, then use this
+option.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+strings concatenated with “\n”</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">&quot;&quot;</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
@@ -23298,10 +23354,10 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>The ghostty package to use.</p>
+<p>The ghostty package to use. Set programs.ghostty.package to null on platfroms where ghostty is not available or marked broken</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-package</p>
+null or package</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">pkgs.ghostty</code></p>
@@ -23355,7 +23411,7 @@ boolean</p>
 boolean</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">true</code></p>
+<code class="literal">true</code> if programs.ghostty.package is not null</p>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">true</code></p>
@@ -39630,7 +39686,7 @@ boolean</p>
  </span>
 </dt>
 <dd>
-<p>The package to use for nushell.</p>
+<p>The nushell package to use.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
 package</p>
@@ -39662,12 +39718,14 @@ null or (submodule)</p>
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">null</code></p>
 
-<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{ text = &#x27;&#x27;
-    let $config = {
-      filesize_metric: false
-      table_mode: rounded
-      use_ls_colors: true
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  text = &#x27;&#x27;
+    const NU_LIB_DIRS = $NU_LIB_DIRS ++ ${
+      lib.hm.nushell.toNushell (lib.concatStringsSep &quot;:&quot; [ ./scripts ])
     }
+    $env.config.filesize_metric = false
+    $env.config.table_mode = &#x27;rounded&#x27;
+    $env.config.use_ls_colors = true
   &#x27;&#x27;;
 }
 
@@ -39829,7 +39887,6 @@ attribute set of (null or (Nushell inline value) or boolean or signed integer or
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
   FOO = &quot;BAR&quot;;
   LIST_VALUE = [ &quot;foo&quot; &quot;bar&quot; ];
-  NU_LIB_DIRS = lib.concatStringsSep &quot;:&quot; [ ./scripts ];
   PROMPT_COMMAND = lib.hm.nushell.mkNushellInline &#x27;&#x27;{|| &quot;&gt; &quot;}&#x27;&#x27;;
   ENV_CONVERSIONS.PATH = {
     from_string = lib.hm.nushell.mkNushellInline &quot;{|s| $s | split row (char esep) }&quot;;
@@ -40031,6 +40088,48 @@ list of package</p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-programs.nushell.settings"></a><a class="term" href="options.xhtml#opt-programs.nushell.settings"><code class="option">programs.nushell.settings</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Nushell settings. These will be flattened and assigned one by one to <code class="literal">$env.config</code> to avoid overwriting the default or existing options.</p><p>For example:</p><pre><code class="programlisting nix">{
+  show_banner = false;
+  completions.external = {
+    enable = true;
+    max_results = 200;
+  };
+}
+</code></pre><p>becomes:</p><pre><code class="programlisting nushell">$env.config.completions.external.enable = true
+$env.config.completions.external.max_results = 200
+$env.config.show_banner = false
+</code></pre>
+
+<p><span class="emphasis"><em>Type:</em></span>
+attribute set of (null or (Nushell inline value) or boolean or signed integer or floating point number or string or path or (attribute set of Nushell values) or (list of Nushell values))</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">{ }</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  history = {
+    format = &quot;sqlite&quot;;
+  };
+  show_banner = false;
+}
+</code></pre>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/programs/nushell.nix" target="_top">
+&lt;home-manager/modules/programs/nushell.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-programs.nushell.shellAliases"></a><a class="term" href="options.xhtml#opt-programs.nushell.shellAliases"><code class="option">programs.nushell.shellAliases</code>
   </a>
  </span>
@@ -40046,6 +40145,7 @@ attribute set of string</p>
 <code class="literal">{ }</code></p>
 
 <p><span class="emphasis"><em>Example:</em></span></p><pre><code class="programlisting">{
+  g = &quot;git&quot;;
   ll = &quot;ls -l&quot;;
 }
 </code></pre>
@@ -62251,20 +62351,22 @@ list of string</p>
 </dd>
 <dt>
  <span class="term">
- <a id="opt-services.cliphist.systemdTarget"></a><a class="term" href="options.xhtml#opt-services.cliphist.systemdTarget"><code class="option">services.cliphist.systemdTarget</code>
+ <a id="opt-services.cliphist.systemdTargets"></a><a class="term" href="options.xhtml#opt-services.cliphist.systemdTargets"><code class="option">services.cliphist.systemdTargets</code>
   </a>
  </span>
 </dt>
 <dd>
-<p>The systemd target that will automatically start the cliphist service.</p><p>When setting this value to <code class="literal">&quot;sway-session.target&quot;</code>,
+<p>The systemd targets that will automatically start the cliphist service.</p><p>When setting this value to <code class="literal">[&quot;sway-session.target&quot;]</code>,
 make sure to also enable <code class="option">wayland.windowManager.sway.systemd.enable</code>,
-otherwise the service may never be started.</p>
+otherwise the service may never be started.</p><p>Note: A single string value is deprecated, please use a list.</p>
 
 <p><span class="emphasis"><em>Type:</em></span>
-string</p>
+(list of string) or string</p>
 
-<p><span class="emphasis"><em>Default:</em></span>
-<code class="literal">&quot;graphical-session.target&quot;</code></p>
+<p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">[
+  &quot;graphical-session.target&quot;
+]
+</code></pre>
 
 <p><span class="emphasis"><em>Example:</em></span>
 <code class="literal">&quot;sway-session.target&quot;</code></p>
@@ -82521,6 +82623,31 @@ package <span class="emphasis"><em>(read only)</em></span></p>
 </dd>
 <dt>
  <span class="term">
+ <a id="opt-wayland.windowManager.hyprland.finalPortalPackage"></a><a class="term" href="options.xhtml#opt-wayland.windowManager.hyprland.finalPortalPackage"><code class="option">wayland.windowManager.hyprland.finalPortalPackage</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The xdg-desktop-portal-hyprland package after overriding its hyprland input.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package <span class="emphasis"><em>(read only)</em></span></p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">wayland.windowManager.hyprland.portalPackage</code> with
+<code class="literal">wayland.windowManager.hyprland.finalPackage</code> override</p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/hyprland.nix" target="_top">
+&lt;home-manager/modules/services/window-managers/hyprland.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
  <a id="opt-wayland.windowManager.hyprland.importantPrefixes"></a><a class="term" href="options.xhtml#opt-wayland.windowManager.hyprland.importantPrefixes"><code class="option">wayland.windowManager.hyprland.importantPrefixes</code>
   </a>
  </span>
@@ -82569,6 +82696,30 @@ list of (package or path)</p>
 
 <p><span class="emphasis"><em>Default:</em></span>
 <code class="literal">[ ]</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/window-managers/hyprland.nix" target="_top">
+&lt;home-manager/modules/services/window-managers/hyprland.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-wayland.windowManager.hyprland.portalPackage"></a><a class="term" href="options.xhtml#opt-wayland.windowManager.hyprland.portalPackage"><code class="option">wayland.windowManager.hyprland.portalPackage</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The xdg-desktop-portal-hyprland package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.xdg-desktop-portal-hyprland</code></p>
 
 <p><span class="emphasis"><em>Declared by:</em></span></p>
 <table border="0" summary="Simple list" class="simplelist">
