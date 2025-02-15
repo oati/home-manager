@@ -25449,8 +25449,8 @@ Valid values are <code class="literal">openpgp</code> (OpenPGP/GnuPG), <code cla
 <p><span class="emphasis"><em>Type:</em></span>
 one of “openpgp”, “ssh”, “x509”</p>
 
-<p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">&quot;openpgp&quot; for state version &lt; 24.11,
-undefined for state version ≥ 24.11
+<p><span class="emphasis"><em>Default:</em></span></p><pre><code class="programlisting">&quot;openpgp&quot; for state version &lt; 25.05,
+undefined for state version ≥ 25.05
 
 </code></pre>
 
@@ -82395,6 +82395,57 @@ null or string</p>
 <tr><td>
 <code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/xsuspender.nix" target="_top">
 &lt;home-manager/modules/services/xsuspender.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.yubikey-agent.enable"></a><a class="term" href="options.xhtml#opt-services.yubikey-agent.enable"><code class="option">services.yubikey-agent.enable</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>Whether to enable Seamless ssh-agent for YubiKeys.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+boolean</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">false</code></p>
+
+<p><span class="emphasis"><em>Example:</em></span>
+<code class="literal">true</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/yubikey-agent.nix" target="_top">
+&lt;home-manager/modules/services/yubikey-agent.nix&gt;
+</a></code>
+</td></tr>
+</table>
+</dd>
+<dt>
+ <span class="term">
+ <a id="opt-services.yubikey-agent.package"></a><a class="term" href="options.xhtml#opt-services.yubikey-agent.package"><code class="option">services.yubikey-agent.package</code>
+  </a>
+ </span>
+</dt>
+<dd>
+<p>The yubikey-agent package to use.</p>
+
+<p><span class="emphasis"><em>Type:</em></span>
+package</p>
+
+<p><span class="emphasis"><em>Default:</em></span>
+<code class="literal">pkgs.yubikey-agent</code></p>
+
+<p><span class="emphasis"><em>Declared by:</em></span></p>
+<table border="0" summary="Simple list" class="simplelist">
+<tr><td>
+<code class="filename"><a class="filename"  href="https://github.com/nix-community/home-manager/blob/master/modules/services/yubikey-agent.nix" target="_top">
+&lt;home-manager/modules/services/yubikey-agent.nix&gt;
 </a></code>
 </td></tr>
 </table>
