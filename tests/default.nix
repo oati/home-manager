@@ -313,6 +313,7 @@ import nmtSrc {
       ./modules/programs/vscode
       ./modules/programs/wallust
       ./modules/programs/watson
+      ./modules/programs/waveterm
       ./modules/programs/wezterm
       ./modules/programs/yazi
       ./modules/programs/zed-editor
@@ -378,6 +379,7 @@ import nmtSrc {
       ./modules/programs/kodi
       ./modules/programs/kickoff
       ./modules/programs/looking-glass-client
+      ./modules/programs/lutris
       ./modules/programs/mangohud
       ./modules/programs/mpvpaper
       ./modules/programs/ncmpcpp-linux
@@ -397,6 +399,7 @@ import nmtSrc {
       ./modules/programs/vesktop
       ./modules/programs/vinegar
       ./modules/programs/waybar
+      ./modules/programs/wayprompt
       ./modules/programs/wlogout
       ./modules/programs/wofi
       ./modules/programs/xmobar
